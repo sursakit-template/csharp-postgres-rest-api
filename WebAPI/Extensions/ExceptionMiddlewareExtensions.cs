@@ -66,15 +66,20 @@ namespace WebAPI.Extensions
                     var exceptions = FlattenExceptions(contextFeature?.Error);
                     var error = new ApiError
                     {
-                        Message = string.Join(Environment.NewLine, exceptions.Select(x => x.Message))
+                        Message = string.Join(
+                            Environment.NewLine,
+                            exceptions.Select(x => x.Message)
+                        )
                     };
 
                     context.Response.StatusCode = (int)statusCode;
                     context.Response.ContentType = "application/json";
-                    await context.Response.WriteAsync(JsonSerializer.Serialize(error, new JsonSerializerOptions 
-                    { 
-                        WriteIndented = true 
-                    }));
+                    await context.Response.WriteAsync(
+                        JsonSerializer.Serialize(
+                            error,
+                            new JsonSerializerOptions { WriteIndented = true }
+                        )
+                    );
                 });
             });
         }

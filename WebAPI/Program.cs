@@ -48,12 +48,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
-// Ensure database is created
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    context.Database.EnsureCreated();
-}
+// Note: Database schema is managed via EF Core migrations
+// Run 'dotnet ef database update' to apply migrations
+// Do NOT use context.Database.EnsureCreated() as it conflicts with migrations
 
 // Configure middleware
 app.ConfigureExceptionHandler(app.Logger);

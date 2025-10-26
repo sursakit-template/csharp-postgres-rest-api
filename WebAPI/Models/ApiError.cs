@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebAPI.Models
 {
@@ -21,9 +21,7 @@ namespace WebAPI.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiError"/> class.
         /// </summary>
-        public ApiError()
-        {
-        }
+        public ApiError() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiError"/> class.
@@ -32,7 +30,9 @@ namespace WebAPI.Models
         public ApiError(ModelStateDictionary modelState)
         {
             IEnumerable<string> errors = modelState.Keys
-                .SelectMany(key => modelState[key]?.Errors.Select(x => x.ErrorMessage) ?? Enumerable.Empty<string>());
+                .SelectMany(key =>
+                    modelState[key]?.Errors.Select(x => x.ErrorMessage) ?? Enumerable.Empty<string>()
+                );
             Message = string.Join(Environment.NewLine, errors);
         }
     }
