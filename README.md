@@ -19,9 +19,13 @@ export ConnectionStrings__DefaultConnection="Host=localhost;Port=5432;Database=m
 # Update IUserRepository, UserRepository, UsersController accordingly
 ```
 
-### 3. Create & Run Migrations
+### 3. Setup & Run Migrations
 ```bash
+# Install packages and tools
 dotnet restore
+dotnet tool restore
+
+# Create and apply migrations
 cd WebAPI
 dotnet ef migrations add InitialCreate
 dotnet ef database update
@@ -67,7 +71,8 @@ API: `http://localhost:5000/api/users`
 ## Common Commands
 
 ```bash
-dotnet restore                  # Install
+dotnet restore                  # Install packages
+dotnet tool restore             # Install dotnet-ef tool
 dotnet run --project WebAPI     # Run
 dotnet build                    # Build
 
@@ -80,6 +85,25 @@ dotnet ef database update       # Apply migration
 
 - .NET 8 SDK
 - PostgreSQL
+
+## Troubleshooting
+
+**Error: "dotnet-ef does not exist"**
+```bash
+# Restore local tools
+dotnet tool restore
+```
+
+**Error: "Database connection string not found"**
+```bash
+export ConnectionStrings__DefaultConnection="postgresql://user:pass@host:5432/db"
+```
+
+**Error: "relation Users does not exist"**
+```bash
+cd WebAPI
+dotnet ef database update
+```
 
 ## Production Notes
 
