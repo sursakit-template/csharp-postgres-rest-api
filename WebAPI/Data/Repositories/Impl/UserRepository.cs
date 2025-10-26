@@ -49,7 +49,10 @@ namespace WebAPI.Data.Repositories.Impl
         /// <returns>All users.</returns>
         public IList<User> GetAll()
         {
-            return _db.Users.ToList();
+            Console.WriteLine($"🔍 DEBUG: Getting all users from database...");
+            var users = _db.Users.ToList();
+            Console.WriteLine($"✅ DEBUG: Retrieved {users.Count} users from database");
+            return users;
         }
 
         /// <summary>
@@ -59,8 +62,10 @@ namespace WebAPI.Data.Repositories.Impl
         /// <returns>Created user entity.</returns>
         public User Create(User entity)
         {
+            Console.WriteLine($"➕ DEBUG: Creating new user: {entity.Name} ({entity.Email})");
             var newEntity = _db.Users.Add(entity).Entity;
             _db.SaveChanges();
+            Console.WriteLine($"✅ DEBUG: User created successfully with ID: {newEntity.Id}");
             return newEntity;
         }
 

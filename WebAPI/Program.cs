@@ -40,7 +40,6 @@ if (connectionString.StartsWith("postgres://") || connectionString.StartsWith("p
 {
     connectionString = ConvertPostgresUriToConnectionString(connectionString);
 }
-
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 
 // Register repositories
