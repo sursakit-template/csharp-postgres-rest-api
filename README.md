@@ -34,7 +34,7 @@ cd ..
 
 ### 4. Run
 ```bash
-dotnet run --project WebAPI
+dotnet run --project WebAPI --urls "http://0.0.0.0:5000"
 ```
 
 API: `http://localhost:5000/api/users`
