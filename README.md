@@ -31,6 +31,7 @@ dotnet run --project WebAPI --urls "http://0.0.0.0:5000"
 ```
 
 API: `http://localhost:5000/api/users`
+Swagger UI: `http://localhost:5000/swagger`
 
 ## API Endpoints
 
@@ -50,6 +51,7 @@ API: `http://localhost:5000/api/users`
 - 🎯 Repository Pattern
 - 🌐 CORS Enabled (All origins allowed)
 - 🚀 Auto-migration on startup
+- 📚 Swagger/OpenAPI Documentation
 
 ## Customize Entity
 

@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Configure CORS - Allow all origins for flexibility
 // For production: Restrict to specific origins like:
@@ -78,6 +79,14 @@ using (var scope = app.Services.CreateScope())
 
 // Configure middleware
 app.ConfigureExceptionHandler(app.Logger);
+
+// Configure Swagger/OpenAPI
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseCors();
 app.MapControllers();
 
