@@ -1,6 +1,6 @@
-# .NET 9 + PostgreSQL REST API Starter
+# .NET 8 + PostgreSQL REST API Starter
 
-REST API template with .NET 9, C#, and PostgreSQL. Designed for quick customization.
+REST API template with .NET 8, C#, and PostgreSQL. Designed for quick customization.
 
 ## Quick Start
 
@@ -13,16 +13,15 @@ export ConnectionStrings__DefaultConnection="postgresql://user:password@host:543
 export ConnectionStrings__DefaultConnection="Host=localhost;Port=5432;Database=mydb;Username=postgres;Password=password"
 ```
 
-### 2. Setup & Run Migrations
+### 2. Setup Migrations (One-time)
 ```bash
 # Install packages and tools
 dotnet restore
 dotnet tool restore
 
-# Create and apply migrations
+# Create initial migration (commits schema to codebase)
 cd WebAPI
 dotnet ef migrations add InitialCreate
-dotnet ef database update
 cd ..
 ```
 
@@ -50,6 +49,7 @@ API: `http://localhost:5000/api/users`
 - 🔄 Dynamic DB Configuration
 - 🎯 Repository Pattern
 - 🌐 CORS Enabled (All origins allowed)
+- 🚀 Auto-migration on startup
 
 ## Customize Entity
 

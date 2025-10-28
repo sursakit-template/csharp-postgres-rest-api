@@ -47,9 +47,34 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
-// Note: Database schema is managed via EF Core migrations
-// Run 'dotnet ef database update' to apply migrations
-// Do NOT use context.Database.EnsureCreated() as it conflicts with migrations
+// Auto-migrate database on startup
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    try
+    {
+        Console.WriteLine("🔄 DEBUG: Applying database migrations...");
+        
+        // Check if database exists, if not create it
+        if (!context.Database.CanConnect())
+        {
+            Console.WriteLine("🆕 DEBUG: Database doesn't exist, creating...");
+            context.Database.EnsureCreated();
+            Console.WriteLine("✅ DEBUG: Database created successfully!");
+        }
+        else
+        {
+            // Apply any pending migrations
+            context.Database.Migrate();
+            Console.WriteLine("✅ DEBUG: Database migrations applied successfully!");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ DEBUG: Failed to setup database: {ex.Message}");
+        throw;
+    }
+}
 
 // Configure middleware
 app.ConfigureExceptionHandler(app.Logger);
