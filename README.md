@@ -1,6 +1,6 @@
-# .NET 8 + PostgreSQL REST API Starter
+# .NET 9 + PostgreSQL REST API Starter
 
-REST API template with .NET 8, C#, and PostgreSQL. Designed for quick customization.
+REST API template with .NET 9, C#, and PostgreSQL. Designed for quick customization.
 
 ## Quick Start
 
@@ -13,13 +13,7 @@ export ConnectionStrings__DefaultConnection="postgresql://user:password@host:543
 export ConnectionStrings__DefaultConnection="Host=localhost;Port=5432;Database=mydb;Username=postgres;Password=password"
 ```
 
-### 2. Customize (Optional)
-```bash
-# Rename entity in WebAPI/Data/Entities/User.cs
-# Update IUserRepository, UserRepository, UsersController accordingly
-```
-
-### 3. Setup & Run Migrations
+### 2. Setup & Run Migrations
 ```bash
 # Install packages and tools
 dotnet restore
@@ -32,7 +26,7 @@ dotnet ef database update
 cd ..
 ```
 
-### 4. Run
+### 3. Run
 ```bash
 dotnet run --project WebAPI --urls "http://0.0.0.0:5000"
 ```
@@ -67,50 +61,4 @@ API: `http://localhost:5000/api/users`
 6. Update `AppDbContext.cs`: `DbSet<User> Users` → `DbSet<Customer> Customers`
 7. Create migration: `cd WebAPI && dotnet ef migrations add InitialCreate`
 8. Apply migration: `dotnet ef database update`
-
-## Common Commands
-
-```bash
-dotnet restore                  # Install packages
-dotnet tool restore             # Install dotnet-ef tool
-dotnet run --project WebAPI     # Run
-dotnet build                    # Build
-
-cd WebAPI
-dotnet ef migrations add <Name> # Add migration
-dotnet ef database update       # Apply migration
-```
-
-## Requirements
-
-- .NET 8 SDK
-- PostgreSQL
-
-## Troubleshooting
-
-**Error: "dotnet-ef does not exist"**
-```bash
-# Restore local tools
-dotnet tool restore
-```
-
-**Error: "Database connection string not found"**
-```bash
-export ConnectionStrings__DefaultConnection="postgresql://user:pass@host:5432/db"
-```
-
-**Error: "relation Users does not exist"**
-```bash
-cd WebAPI
-dotnet ef database update
-```
-
-## Production Notes
-
-**CORS Configuration:**  
-Currently allows all origins for maximum flexibility. When you know your frontend URL, update `Program.cs`:
-```csharp
-policy.WithOrigins("https://yourfrontend.com")
-      .AllowAnyMethod()
-      .AllowAnyHeader();
-```
+ 
